@@ -2,6 +2,6 @@
 ## This is an apple.
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
+| 123      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| zeb22dfddfdfdsfsdf stripes | are neat      |    $1 |
