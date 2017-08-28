@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class numToLetter {
+
+	public static void main(String[] args) {
+		String[] chNumber = {"零","一","二","三","四","五","六","七","八","九"};
+		String[] chUnit = {"十","百","千"};
+		Integer numInput;    
+		Integer numLength;   
+		String numString;    
+				
+		System.out.println("輸入0~9999的數字:");
+		Scanner sc = new Scanner(System.in);
+		
+		while(sc.hasNext()) {
+			StringBuffer cnStr = new StringBuffer();   //中文字暫存
+			numInput = sc.nextInt();
+			numString = numInput.toString();    //輸入的數字轉字串
+			numLength = numString.length();     //取出字串長度可得知幾位數
+			char[] a = numString.toCharArray();
+			for(int i=0 ; i<numLength ; i++) {
+				int b = (int)(a[i]-'0');        //將字串(數字)轉回整數
+			//=====先處理10~19。 ex:15 從"一十五"變為"十五"=====
+				if(numLength == 2 && a[0] == '1') {  
+					cnStr.append(chUnit[0]);   //取出對應的中文字
+					cnStr.append(chNumber[(int)(a[1]-'0')]);
+					break;
+				}
+			//=====若最後一位數為0，則不加"零"。 ex:970 從"九百七十零"變為"九百七十"=======	
+				else{
+					if(i == numLength-1 && b == 0) {
+						continue;
+					}
+					else {
+						cnStr.append(chNumber[b]);
+					}
+			//=====找出若某位數是"0"，則不用加單位。ex:705 從"七百零十五"變為"七百零五"=======		
+					if(b != 0) {
+						if((numLength-i-2) >= 0) {
+							cnStr.append(chUnit[numLength-i-2]);
+						}
+					}
+				}						
+			}
+	    System.out.println(cnStr);	
+		}		
+	}
+}
