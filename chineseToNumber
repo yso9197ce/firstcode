@@ -16,7 +16,7 @@ public class letterToNum {
 		while(sc.hasNext()) {
 			inputChinese = sc.next();
 		//=====十到十九不會有第一位數字，將a轉為false(直接進判斷單位的for迴圈)=====
-			if(inputChinese.length() == 2) {
+			if(inputChinese.length() == 2 && inputChinese.charAt(0) == '十') {
 				a = false;
 				temp = 1;
 			}
@@ -67,3 +67,5 @@ public class letterToNum {
 		
 		}
 	}
+
+
