@@ -26,16 +26,37 @@ public class numToLetter {
 					cnStr.append(chNumber[(int)(a[1]-'0')]);
 					break;
 				}
-			//=====若最後一位數為0，則不加"零"。 ex:970 從"九百七十零"變為"九百七十"=======	
+			//=====考慮各種出現0的時機=======	
 				else{
-					if(i == numLength-1 && b == 0) {
-						continue;
-					}
-					else {
-						cnStr.append(chNumber[b]);
+					if(b == 0){
+						try{
+					//=====如果該數字是0，後面數字也為0，則不加任何中文數字=======		
+							if((int)(a[i]-'0') == 0 && (int)(a[i+1]-'0') == 0){
+								continue;
+							}
+					//=====如果該數字是0，前後面數字也都為0，則不加任何中文數字=======
+							else if((int)(a[i-1]-'0') == 0 && (int)(a[i+1]-'0') == 0){
+							continue;
+							}
+					//=====如果前一個數字是0，該數字也為0且是最後一位數，則不加任何中文數字=======	
+							else if((int)(a[i-1]-'0') == 0 && (i == numLength-1 && b == 0)){
+							continue;
+							}
+					//=====如果該數字是0且是最後一位數，則不加任何中文數字=======
+							else if(i == numLength-1 && b == 0) {
+							continue;
+							}
+					//=====其他情況下則添加中文數字=======
+							else{
+							cnStr.append(chNumber[b]);
+							}
+						}catch(Exception e){   //避免超過index
+							continue;
+						}
 					}
 			//=====找出若某位數是"0"，則不用加單位。ex:705 從"七百零十五"變為"七百零五"=======		
-					if(b != 0) {
+					else if(b != 0) {
+						cnStr.append(chNumber[b]);
 						if((numLength-i-2) >= 0) {
 							cnStr.append(chUnit[numLength-i-2]);
 						}
